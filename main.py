@@ -7,10 +7,10 @@ import carObjectClass
 
 class TestMethod:
     def test(self):
-        driver = webdriver.Chrome("/Users/spencerbaldwin/Desktop/vscodeProjects/Part-Picker-GamePlanner/Drivers/chromedriver_mac_arm64/chromedriver")
+        driver = webdriver.Chrome()
         driver.get("https://www.lkqpickyourpart.com/")
 
-        #trying to keep chrome open
+        # trying to keep chrome open
         chrome_options = Options()
         chrome_options.add_experimental_option("detach", True)
 
@@ -24,7 +24,7 @@ class TestMethod:
 
 
 class SeleniumScraper:
-    #xpath for each element
+    # xpath for each element
     driver = ""
     listofcars = "//*[@id='pypvi_results']"
     car_card_wrappers = "//*[@class='pypvi_resultRow']"
@@ -37,20 +37,23 @@ class SeleniumScraper:
     car_space = ""
     car_stocknum = ""
     car_avalibilitydate = ""
+
     def __init__(self, driver):
         self.driver = driver
 
     # Selenium script to access webpage
     def click_inventory_button(self):
-        inventoryoption = self.driver.find_element(By.LINK_TEXT,"VIEW OUR INVENTORY")
+        inventoryoption = self.driver.find_element(
+            By.LINK_TEXT, "VIEW OUR INVENTORY")
         inventoryoption.click()
 
     def click_drop_down_menu(self):
-        dropdown = self.driver.find_element(By.ID,"locationBox")
+        dropdown = self.driver.find_element(By.ID, "locationBox")
         dropdown.click()
-    
+
     def select_option_values(self):
-        oppgroup = self.driver.find_element(By.XPATH, "//optgroup[@label='Alabama']")
+        oppgroup = self.driver.find_element(
+            By.XPATH, "//optgroup[@label='Alabama']")
         opp = oppgroup.find_element(By.XPATH, "//option[@value='1223']")
         opp.click()
         time.sleep(2)
@@ -61,7 +64,7 @@ class SeleniumScraper:
         # count = 0
         # print(individual_car_list)
         # carobjectclasslist = []
-        #car_details = cars_list.find_elements(By.XPATH, self.car_detail_wrapper)
+        # car_details = cars_list.find_elements(By.XPATH, self.car_detail_wrapper)
         car_names = self.driver.find_elements(By.XPATH, self.car_name)
         for element in car_names:
             print("check ", element.text)
@@ -82,5 +85,5 @@ class SeleniumScraper:
 
 run = TestMethod()
 run.test()
-        
-#click one the options using value
+
+# click one the options using value
